@@ -11,7 +11,7 @@ class CommentArea extends Component {
     isError: false,
   };
 
-  componentDidMount = async () => {
+  async getComments() {
     try {
       let response = await fetch(
         "https://striveschool-api.herokuapp.com/api/comments/" +
@@ -35,7 +35,13 @@ class CommentArea extends Component {
       console.log(error);
       this.setState({ isLoading: false, isError: true });
     }
-  };
+  }
+
+  componentDidUpdate(prevProp, prevState) {
+    if (this.props.asin !== prevProp.asin) {
+      this.getComments();
+    }
+  }
 
   render() {
     return (

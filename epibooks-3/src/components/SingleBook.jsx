@@ -6,14 +6,14 @@ class SingleBook extends Component {
     selected: false,
   };
 
-  // checkSelected () => {}
-
   render() {
     return (
       <>
         <Card
-          onClick={() => this.setState({ selected: !this.state.selected })}
-          style={{ border: this.state.selected ? "3px solid red" : "none" }}
+          onClick={() => {
+            this.props.getAsin(this.props.book.asin);
+            console.log(this.props.book);
+          }}
         >
           <Card.Img variant="top" src={this.props.book.img} />
           <Card.Body>

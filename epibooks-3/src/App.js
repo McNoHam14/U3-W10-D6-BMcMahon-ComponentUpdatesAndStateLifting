@@ -13,11 +13,17 @@ import { Component } from "react";
 
 class App extends Component {
   state = {
-    selectedBook: undefined,
+    selectedBook: null,
   };
 
-  selectBook = (elementClicked) =>
-    this.setState({ selectedBook: elementClicked });
+  constructor(props) {
+    super(props);
+    this.getAsin = this.getAsin.bind(this);
+  }
+
+  getAsin(asin) {
+    this.setState({ selectedBook: asin });
+  }
 
   render() {
     return (
@@ -28,14 +34,10 @@ class App extends Component {
         <Container>
           <Row>
             <Col>
-              <BookList
-                books={fantasy}
-                selectedBookFromApp={this.state.selectedBook}
-                changeAppStateFromApp={this.selectBook}
-              />
+              <BookList books={fantasy} getAsin={this.getAsin} />
             </Col>
             <Col>
-              <CommentArea selectedBookFromApp={this.state.selectedBook} />
+              <CommentArea asin={this.state.selectedBook} />
             </Col>
           </Row>
         </Container>
